@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Local Community Event Portal</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  .event-card { border: 1px solid #ccc; margin: 10px 0; padding: 10px; border-radius: 6px; }
+  .hidden { display: none; }
+  .error { color: red; }
+</style>
+</head>
+<body>
+
+<h1>Community Event Portal</h1>
+
+<label for="categoryFilter">Filter by category:</label>
+<select id="categoryFilter">
+  <option value="">All</option>
+  <option value="Music">Music</option>
+  <option value="Workshop">Workshop</option>
+  <option value="Sport">Sport</option>
+</select>
+
+<label for="searchInput">Search by name:</label>
+<input type="text" id="searchInput" placeholder="Type event name..." />
+
+<div id="eventsContainer"></div>
+
+<h2>Register for an Event</h2>
+<form id="registrationForm">
+  <label>Name: <input type="text" name="name" required /></label><br /><br />
+  <label>Email: <input type="email" name="email" required /></label><br /><br />
+  <label>Event:
+    <select name="eventSelect" required></select>
+  </label><br /><br />
+  <button type="submit" id="registerBtn">Register</button>
+  <p class="error" id="formError"></p>
+  <p id="formSuccess" style="color:green;"></p>
+</form>
+
+<script src="main.js"></script>
+
+</body>
+</html>

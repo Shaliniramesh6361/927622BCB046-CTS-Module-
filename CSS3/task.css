@@ -1,0 +1,235 @@
+/* ===== 2. CSS Syntax and Comments ===== */
+/* Style for main CTA button */
+.cta-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .cta-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* ===== 3. Selectors Playground ===== */
+  /* Reset margin and padding */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Element selector */
+  h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 2rem;
+    margin: 20px 0 10px 0;
+  }
+  
+  /* ID selector */
+  #mainHeader {
+    background-color: #004d40;
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  /* Class selector */
+  .eventCard {
+    border: 2px solid #4CAF50;
+    padding: 20px;
+    margin: 20px 10px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Grouping selector */
+  h3, p.description {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  /* ===== 4. Color & Background Styling ===== */
+  body {
+    color: rgba(0, 0, 0, 0.8);
+    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Gradient on section headers */
+  section h2 {
+    background: linear-gradient(90deg, #4CAF50, #81C784);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* ===== 5. Typography ===== */
+  /* Import Google Fonts */
+  @import url('https://fonts.googleapis.com/css2?family=Merriweather&family=Poppins&display=swap');
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+  
+  h2 {
+    font-family: 'Merriweather', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  
+  p.description {
+    font-style: italic;
+    font-weight: 300;
+    text-align: justify;
+    letter-spacing: 0.03em;
+    line-height: 1.8;
+  }
+  
+  /* ===== 6. Link and List Styling ===== */
+  a:link {
+    color: #007BFF;
+    text-decoration: none;
+  }
+  
+  a:visited {
+    color: #551A8B;
+  }
+  
+  a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  a:active {
+    color: #003366;
+  }
+  
+  /* Navigation menu styling */
+  .nav-menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-menu li {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-menu li a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .nav-menu li a:hover {
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+  
+  /* Generic bullet list */
+  ul.custom-list {
+    list-style-type: disc;
+    list-style-position: outside;
+    margin-left: 20px;
+  }
+  
+  ul.custom-list li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+  
+  /* ===== 7. Table Styling ===== */
+  .event-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event-table th,
+  .event-table td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+  }
+  
+  .event-table thead {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .event-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .event-table tbody tr:hover {
+    background-color: #eef6ff;
+  }
+  
+  /* ===== 8. Box Model & Layout Control ===== */
+  .eventCard {
+    border: 2px solid #4CAF50;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Outline for focused inputs */
+  input:focus, select:focus, textarea:focus {
+    outline: 3px solid #FF9800;
+    outline-offset: 2px;
+  }
+  
+  /* Visibility examples */
+  .hidden-example {
+    visibility: hidden;
+    background-color: #ffcc00;
+    padding: 10px;
+    margin: 10px 0;
+  }
+  
+  .none-example {
+    display: none;
+  }
+  
+  /* ===== 9. Multiple Columns ===== */
+  .community-bulletin {
+    column-count: 2;
+    column-gap: 30px;
+    column-rule: 1px solid gray;
+    padding: 15px;
+    background-color: #fafafa;
+    font-family: 'Merriweather', serif;
+    line-height: 1.6;
+    margin: 20px 0;
+  }
+  
+  /* ===== 10. Responsive Web Design ===== */
+  .nav-menu {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-menu li a {
+   
+  

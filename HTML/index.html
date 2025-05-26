@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Local Community Event Portal</title>
+  <style>
+    /* --- Base styles --- */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.5;
+    }
+    header, nav, main, footer, section {
+      padding: 10px 20px;
+    }
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #007BFF;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    /* Welcome banner */
+    #welcomeBanner {
+      background-color: #007BFF;
+      color: white;
+      padding: 15px;
+      font-size: 1.2rem;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+      padding: 2px 5px;
+    }
+    /* Image gallery */
+    table {
+      border-collapse: collapse;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 800px;
+      text-align: center;
+    }
+    table caption {
+      font-weight: bold;
+      margin-bottom: 8px;
+      font-size: 1.1rem;
+    }
+    td {
+      padding: 8px;
+      border: 1px solid #ccc;
+    }
+    .eventImage {
+      border: 3px solid #007BFF;
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .eventImage.enlarged {
+      transform: scale(1.5);
+      z-index: 10;
+      position: relative;
+      box-shadow: 0 0 15px rgba(0,123,255,0.7);
+    }
+    /* Form styles */
+    form {
+      max-width: 500px;
+      margin: 20px auto 40px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    form input[type="text"],
+    form input[type="email"],
+    form input[type="date"],
+    form select,
+    form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 1rem;
+    }
+    form textarea {
+      resize: vertical;
+      height: 80px;
+    }
+    form button {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    form button:hover {
+      background-color: #0056b3;
+    }
+    #formOutput {
+      margin-top: 15px;
+      font-weight: bold;
+      color: green;
+      text-align: center;
+    }
+    /* Feedback textarea char count */
+    #charCount {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 6px;
+      text-align: right;
+    }
+    /* Video styling */
+    #videoContainer {
+      text-align: center;
+      margin: 40px 0;
+    }
+    video {
+      width: 90%;
+      max-width: 600px;
+      border: 4px solid #007BFF;
+      border-radius: 8px;
+    }
+    #videoStatus {
+      margin-top: 10px;
+      font-weight: bold;
+      color: green;
+    }
+    /* Preferences */
+    #preferences {
+      max-width: 400px;
+      margin: 20px auto;
+      background: white;
+      padding: 15px 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    #preferences select {
+      width: 80%;
+      padding: 8px;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+    #preferences button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background: #dc3545;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #preferences button:hover {
+      background: #b02a37;
+    }
+    #prefStatus {
+      margin-top: 10px;
+      font-weight: bold;
+      color: green;
+    }
+    /* Geolocation */
+    #geoContainer {
+      max-width: 400px;
+      margin: 30px auto 50px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    #geoContainer button {
+      padding: 12px 20px;
+      font-size: 1rem;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #geoContainer button:hover {
+      background-color: #218838;
+    }
+    #locationOutput {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    #locationOutput.error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#events">Events</a>
+    <a href="#contact">Contact</a>
+    <a href="help.html" target="_blank">Help</a>
+  </nav>
+
+  <!-- Welcome Banner -->
+  <div id="welcomeBanner">
+    Welcome back, <span class="highlight">Community Member</span>! 
+    Don't miss our <span style="color:red; font-weight:bold;">special offer</span> on upcoming events!
+  </div>
+
+  <main>
+
+    <!-- Home Section -->
+    <section id="home">
+      <h2>Home</h2>
+      <p>Welcome to the Local Community Event Portal. Use the navigation to explore events, register, and contact us.</p>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events">
+
+      <h2>Past Event Gallery</h2>
+      <table>
+        <caption>Photos from Past Events</caption>
+        <tbody>
+          <tr>
+            <td>
+              <img src="https://via.placeholder.com/150x100?text=Cleanup+Day" 
+                   alt="Community Cleanup Event" 
+                   title="Cleanup Day" 
+                   class="eventImage" 
+                   ondblclick="toggleImageSize(this)">
+              <br>Cleanup Day
+            </td>
+            <td>
+              <img src="https://via.placeholder.com/150x100?text=Festival" 
+                   alt="City Festival" 
+                   title="City Festival" 
+                   class="eventImage" 
+                   ondblclick="toggleImageSize(this)">
+              <br>City Festival
+            </td>
+            <td>
+              <img src="https://via.placeholder.com/150x100?text=Workshop" 
+                   alt="Gardening Workshop" 
+                   title="Workshop" 
+                   class="eventImage" 
+                   ondblclick="toggleImageSize(this)">
+              <br>Gardening Workshop
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img src="https://via.placeholder.com/150x100?text=Seminar" 
+                   alt="Health Seminar" 
+                   title="Seminar" 
+                   class="eventImage" 
+                   ondblclick="toggleImageSize(this)">
+              <br>Health Seminar
+            </td>
+            <td>
+              <img src="https://via.placeholder.com/150x100?text=Music+Night" 
+                   alt="Music Night" 
+                   title="Music Night" 
+                   class="eventImage" 
+                   ondblclick="toggleImageSize(this)">
+              <br>Music Night
+            </td>
+            <td>
+              <img src="https://via.placeholder.com/150x100?text=Art+Show" 
+                   alt="Art Show" 
+                   title="Art Show" 
+                   class="eventImage" 
+                   ondblclick="toggleImageSize(this)">
+              <br>Art Show
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Register for an Event</h2>
+      <form id="eventForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Your full name" required autofocus />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="your.email@example.com" required />
+
+        <label for="date">Event Date:</label>
+        <input type="date" id="date" required />
+
+        <label for="eventSelect">Event Type:</label>
+        <select id="eventSelect" required onchange="displayEventFee()">
+          <option value="">-- Select event type --</option>
+          <option value="Workshop">Workshop</option>
+          <option value="Cleanup">Neighborhood Cleanup</option>
+          <option value="Festival">Festival</option>
+          <option value="Seminar">Seminar</option>
+        </select>
+
+        <label for="message">Additional Message:</label>
+        <textarea id="message" placeholder="Your message here..." onkeyup="countChars()" maxlength="200"></textarea>
+        <div id="charCount">0/200 characters</div>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" placeholder="e.g. 123-456-7890" onblur="validatePhone()" />
+
+        <output id="formOutput"></output>
+
+        <button type="submit" id="submitBtn" onclick="confirmSubmission(event)">Register</button>
+      </form>
+
+      <!-- Event Fee Display -->
+      <div id="eventFee" style="font-weight:bold; margin-top:10px;"></div>
+
+    </section>
+
+    <!-- Video Invite Section -->
+    <section id="videoInvite">
+      <h2>Event Promo Video</h2>
+      <div id="videoContainer">
+        <video id="promoVideo" controls oncanplay="videoReady()">
+          <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
+          Sorry, your browser doesn't support embedded videos.
+        </video>
+        <div id="videoStatus"></div>
+      </div>
+    </section>
+
+    <!-- Preferences Section -->
+    <section id="preferencesSection">
+      <h2>User Preferences</h2>
+      <div id="preferences">
+        <label for="prefEventType">Preferred Event Type:</label>
+        <select id="prefEventType" onchange="savePreference()">
+          <option value="">-- Choose an event --</option>
+          <option value="Workshop">Workshop</option>
+          <option value="Cleanup">Neighborhood Cleanup</option>
+          <option value="Festival">Festival</option>
+          <option value="Seminar">Seminar</option>
+        </select>
+        <button onclick="clearPreferences()">Clear Preferences</button>
+        <div id="prefStatus"></div>
+      </div>
+    </section>
+
+    <!-- Geolocation Section -->
+    <section id="locationSection">
+      <h2>Find Events Near You</h2>
+      <div id="geoContainer">
+        <button onclick="findNearbyEvents()">Find Nearby Events</button>
+        <div id="locationOutput"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Local Community Event Portal. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // --- Video oncanplay ---
+    function videoReady() {
+      const videoStatus = document.getElementById("videoStatus");
+      videoStatus.textContent = "✅ Video ready to play!";
+      console.log("Video can play event triggered");
+    }
+
+    // --- Warn onbeforeunload if form is not submitted ---
+    let formSubmitted = false;
+    document.getElementById("eventForm").addEventListener("submit", function (e) {
+      formSubmitted = true;
+    });
+    window.onbeforeunload = function(e) {
+      if (!formSubmitted) {
+        return "You have unsaved changes. Are you sure you want to leave?";
+      }
+    };
+
+    // --- Registration Form Submission Confirmation ---
+    function confirmSubmission(event) {
+      event.preventDefault();
+      if (!document.getElementById("eventForm").checkValidity()) {
+        // Let HTML5 validation bubble up
+        return;

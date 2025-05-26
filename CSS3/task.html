@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Local Community Event Portal</title>
+
+<!-- 1. External stylesheet -->
+<link rel="stylesheet" href="styles.css" />
+
+<!-- 1. Internal style: body background fallback -->
+<style>
+  body {
+    background-color: #f0f4f8;
+  }
+</style>
+</head>
+<body>
+
+<!-- 1. Inline style to make this heading red -->
+<h1 style="color: red;">Welcome to the Local Community Event Portal</h1>
+
+<!-- 3. ID selector -->
+<header id="mainHeader">
+  <nav>
+    <ul class="nav-menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- 3. Class selector -->
+<div class="eventCard">
+  <h2>Upcoming Event</h2>
+  <h3>Community Cleanup</h3>
+  <p class="description">Join us to keep our neighborhood clean and green!</p>
+</div>
+
+<!-- 7. Table -->
+<table class="event-table" aria-label="Events Admin Table">
+  <thead>
+    <tr>
+      <th>Event</th><th>Date</th><th>Location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Cleanup</td><td>June 5</td><td>Central Park</td></tr>
+    <tr><td>Fundraiser</td><td>June 12</td><td>Community Hall</td></tr>
+    <tr><td>Workshop</td><td>June 19</td><td>Library</td></tr>
+  </tbody>
+</table>
+
+<!-- 9. Multi-column text -->
+<section class="community-bulletin">
+  <h2>Community Bulletin</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis...</p>
+  <p>Aliquam erat volutpat. Praesent pulvinar, sapien vel feugiat vehicula, velit justo cursus urna, nec dapibus sapien lacus nec urna...</p>
+</section>
+
+<!-- Hero image -->
+<section class="hero-image">
+  <img src="https://via.placeholder.com/1200x400" alt="Community Event" />
+</section>
+
+<form>
+  <label for="name">Name:</label><br />
+  <input type="text" id="name" name="name" /><br />
+  <label for="email">Email:</label><br />
+  <input type="email" id="email" name="email" /><br />
+  <input type="submit" value="Register" class="cta-button" />
+</form>
+
+</body>
+</html>
